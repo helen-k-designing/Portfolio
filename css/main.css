@@ -1,3 +1,7 @@
+  html {
+        font-size: 100%;
+    }
+  
   main {
         display: flex;
         flex-direction: column;
@@ -5,6 +9,7 @@
         justify-content: center;
         min-height: 100vh;
     }
+
   body {
         font-family: 'Roboto', sans-serif;
         margin: 0;
@@ -16,77 +21,84 @@
         font-variation-settings: "wdth" 100;
         font-size: 1.4rem;
         background: linear-gradient(
-    to right,
-    #e8f5e9 5%,   /* Найсвітліший зелений */
-    #c8e6c9 17%,  /* Світло-зелений */
-    #66bb6a 40%,  /* Насичений зелений */
-    #2e7d32 85%,  /* Темно-зелений */
-    #1b5e20 95%   /* Найтемніший зелений */
-  );
+        to right,
+       #e8f5e9 5%,   /* Найсвітліший зелений */
+       #c8e6c9 17%,  /* Світло-зелений */
+       #66bb6a 40%,  /* Насичений зелений */
+       #2e7d32 85%,  /* Темно-зелений */
+       #1b5e20 95%   /* Найтемніший зелений */
+       );
     }
 
-
-  html {
-        font-size: 100%;
-    }
   h1.text62 {
-  font-size: 2.4rem;
-}
-h1.text65 {
- font-weight: 700;
- font-size: 1.45rem;
-}
-h2 {
-    font-weight: 700;
-  font-size: 1.3rem;
-}
-h3 {
-    font-weight: 700;
-  font-size: 1.8rem;
-}
-div.text {
-  font-size: 1.6em;
-}
-span {
-  font-size: 1.6em;
-}
-strong {
-  font-size: 1.6rem;
-}
-.list-unstyled {
-  list-style: none;
-}
-.footer-social {
+       font-size: 2.4rem;
+    }
+
+  h1.text65 {
+       font-weight: 700;
+       font-size: 1.45rem;
+    }
+
+  h2 {
+       font-weight: 700;
+       font-size: 1.3rem;
+    }
+
+  h3 {
+       font-weight: 700;
+       font-size: 1.8rem;
+    }
+
+ div.text {
+       font-size: 1.6em;
+    }
+
+  span {
+       font-size: 1.6em;
+   }
+
+  strong {
+       font-size: 1.6rem;
+    }
+
+  .list-unstyled {
+       list-style: none;
+    }
+
+  .footer-social {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-}
-.negative {
-  background: linear-gradient(
-    to left,
-    #e0f2fe -50%, /* Надзвичайно світлий блакитний (за межами зліва) */
-    #bae6fd -10%, /* Дуже світло-синій (за межами зліва) */
-    #38bdf8 0%,   /* Світло-синій на правому краї елемента */
-    #1d4ed8 100%, /* Темно-синій на лівому краї елемента */
-    #1e3a8a 150%  /* Глибокий темно-синій (за межами справа) */
-  );
-}
-.percents {
-    min-height: 130em;
-  background: linear-gradient(
-    to bottom,
-    #e8f5e9 2em,    /* Найсвітліший зелений */
-    #c8e6c9 4em,
-    #a5d6a7 8em,
-    #66bb6a 16em,   /* Середній зелений */
-    #43a047 32em,
-    #2e7d32 64em,
-    #1b5e20 128em   /* Найтемніший зелений */
-  );
-}
-.radial {
-  background: 
-    radial-gradient(ellipse farthest-corner at center top, orange, transparent),
-    radial-gradient(ellipse farthest-corner at center bottom, red, transparent);
-}
+    }
+
+ .negative {
+       background: linear-gradient(
+       to left,
+      #e0f2fe -50%, /* Надзвичайно світлий блакитний (за межами зліва) */
+      #bae6fd -10%, /* Дуже світло-синій (за межами зліва) */
+      #38bdf8 0%,   /* Світло-синій на правому краї елемента */
+      #1d4ed8 100%, /* Темно-синій на лівому краї елемента */
+      #1e3a8a 150%  /* Глибокий темно-синій (за межами справа) */
+     );
+    }
+
+ .percents {
+       min-height: 130em;
+       background: linear-gradient(
+       to bottom,
+      #e8f5e9 2em,    /* Найсвітліший зелений */
+      #c8e6c9 4em,
+      #a5d6a7 8em,
+      #66bb6a 16em,   /* Середній зелений */
+      #43a047 32em,
+      #2e7d32 64em,
+      #1b5e20 128em   /* Найтемніший зелений */
+     );
+    }
+
+  .radial {
+       background: 
+       radial-gradient(ellipse farthest-corner at center top, orange, transparent),
+       radial-gradient(ellipse farthest-corner at center bottom, red, transparent);
+    }
