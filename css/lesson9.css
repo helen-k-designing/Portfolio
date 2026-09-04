@@ -1,0 +1,114 @@
+.flex-container {
+    flex-direction: row;     
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.flex-item {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+
+}
+
+.box1 {
+    background-color: lightblue;
+}  
+
+.box2 {
+    background-color: lightgreen;
+}
+
+.box3 {
+    background-color: lightcoral;
+    flex: 3 120px;
+}
+
+.box4 {
+    background-color: lightgoldenrodyellow;
+}
+
+.box5 {
+    background-color: lightpink;
+}
+
+.box6 {
+    background-color: lightseagreen;
+}
+
+.box7 {
+    background-color: lightsteelblue;
+}
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #c082c0;
+padding: 1rem 2rem;
+} 
+
+.nav-logo a {
+color: #432652;
+font-size: 1.5rem;
+font-weight: bold;
+text-decoration: none;
+}
+
+.nav-links {
+display: flex;
+list-style: none;
+gap: 1.5rem; 
+}
+.nav-links a {
+color: #ffffff;
+text-decoration: none;
+font-size: 1rem;
+transition: color 0.3s ease;
+}
+.nav-links a:hover {
+color: #3e2558; 
+}
+
+/* The wrapper container */
+.flex-table {
+display: flex;
+flex-direction: column;
+border: 1px solid #ddd;
+border-radius: 4px;
+overflow: hidden;
+}
+
+/* Each row is a horizontal flex container */
+.table-row {
+display: flex;
+flex-direction: row;
+width: 100%;
+border-bottom: 1px solid #ddd;
+}
+
+/* Remove border from the last row */
+.table-row:last-child {
+border-bottom: none;
+}
+
+/* Header specific styling */
+.table-row.header {
+background-color: #f5f5f5;
+font-weight: bold;
+}
+
+/* The cells stretch and shrink equally */
+.table-cell {
+flex: 1;
+padding: 12px;
+text-align: left;
+/* Visual separator for columns (optional) */
+border-right: 1px solid #ddd;
+}
+
+/* Remove right border from the last column */
+.table-cell:last-child {
+border-right: none;
+}
