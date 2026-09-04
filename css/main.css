@@ -23,6 +23,8 @@ padding: 15px;
 }
 
 .header-logo {
+   width: 100px;
+   height: auto;
    display: flex;                
    background-color: transparent; /* Перестраховка: прибирає будь-який колір фону у самої картинки */
    border: none;                  /* Прибирає рамки, які іноді додають старі браузери */
