@@ -1,0 +1,36 @@
+/* Блок */
+.product-card {
+border: 1px solid #ccc;
+padding: 16px;
+
+    /* Елемент */
+    &__image {
+    width: 100%;
+    }
+
+    /* Елемент */
+    &__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    }
+
+    /* Елемент */
+    &__price {
+    font-weight: bold;
+
+        /* Модифікатор */
+        &--discount {
+        color: red;
+        }
+    }
+
+    /* Елемент */
+    &__button {
+    background-color: blue;
+    
+       /* Модифікатор */
+       &--disabled {
+       background-color: gray;
+       }
+    }
+}
