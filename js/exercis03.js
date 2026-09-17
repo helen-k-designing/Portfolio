@@ -55,7 +55,6 @@ alert("Сума введених чисел: " + totalSum);
 console.log(`Ви ввели числа, їхня сума становить: ${totalSum}`);
 
 
-
 const styles = ["Jazz", "Blues"];
 styles.push("Rock-n-Roll");
 const middleIndex = Math.floor(styles.length / 2);
