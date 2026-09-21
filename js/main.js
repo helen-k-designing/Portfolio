@@ -49,25 +49,11 @@ let thirdButton = buttonsList[2];
         }
     };
     
-    // 1. Отримуємо список усіх кнопок на сторінці
-let allProjectButtons = document.querySelectorAll('button');
-
-// 2. Витягуємо з цього списку четверту кнопку за її індексом (3)
-let fourthButton = allProjectButtons[3];
-
-
     
-    // 3. Налаштовуємо обробку події натискання (кліку)
+let allProjectButtons = document.querySelectorAll('button');
+let fourthButton = allProjectButtons[3];
     fourthButton.onclick = function() {
-        
-        /* 
-           4. МАГІЯ ПЕРЕМИКАННЯ ТЕМИ:
-           Метод classList.toggle автоматично додає клас 'dark-theme' до тегу <body>, 
-           якщо його немає, або видаляє його, якщо він уже присутній.
-        */
         document.body.classList.toggle('dark-theme');
-        
-        // Показ у консоль поточного стану для перевірки
         let isDark = document.body.classList.contains('dark-theme');
         console.log(`Тему змінено! Поточний режим: ${isDark ? 'ТЕМНИЙ 🌙' : 'СВІТЛИЙ ☀️'}`);
     };
