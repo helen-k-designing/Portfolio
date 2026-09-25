@@ -25,37 +25,39 @@ fourthParagraph.classList.add('fourth', 'border');
 console.log("Для четвертого абзацу додано класи:", fourthParagraph);
 
 
-let firstButton = document.querySelector('button');
-firstButton.style.backgroundColor = "gold";
-firstButton.style.color = "blue";
-console.log("Першу кнопку успішно знайдено та стилізовано:", firstButton);
-
-
 let allButtons = document.querySelectorAll('button');
+
+let firstButton = allButtons[0];
+if (firstButton) {
+    firstButton.style.backgroundColor = "gold";
+    firstButton.style.color = "blue";
+    console.log("Першу кнопку успішно знайдено та стилізовано:");
+}
+
 let secondButton = allButtons[1];
-secondButton.onclick = function() {
-    document.querySelector('#p1').style.display = "none";
-};
-console.log("Другу кнопку знайдено та стилізовано:", secondButton);
+if (secondButton) {
+    secondButton.onclick = function () {
+        document.querySelector('#p1').style.display = "none";
+    };
+    console.log("Другу кнопку знайдено та стилізовано:");
+}
 
-
-let buttonsList = document.querySelectorAll('button');
-let thirdButton = buttonsList[2];
-    thirdButton.onclick = function() {
+let thirdButton = allButtons[2];
+if (thirdButton) {
+    thirdButton.onclick = function () {
         let paragraph1 = document.querySelector('#p1');
         if (paragraph1) {
             paragraph1.style.display = "block";
-            console.log("Параграф p1 знову успішно відображено на сторінці!", thirdButton);
+            console.log("Параграф p1 знову успішно відображено на сторінці!");
         }
     };
-    
-    
-let allProjectButtons = document.querySelectorAll('button');
-let fourthButton = allProjectButtons[3];
-    fourthButton.onclick = function() {
+}
+
+let fourthButton = allButtons[3];
+if (fourthButton) {
+    fourthButton.onclick = function () {
         document.body.classList.toggle('dark-theme');
         let isDark = document.body.classList.contains('dark-theme');
         console.log(`Тему змінено! Поточний режим: ${isDark ? 'ТЕМНИЙ 🌙' : 'СВІТЛИЙ ☀️'}`);
     };
-
-
+}
