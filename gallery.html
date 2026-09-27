@@ -3,113 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery</title>
-            <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="apple-touch-icon" sizes="180×180" href="./apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32×32" href="./favicon-32×32.png">
-<link rel="icon" type="image/png" sizes="16×16" href="./favicon-16×16.png">
-<link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" type="image/png" sizes="32×32" href="./favicon-32×32.png">
+    <link rel="icon" type="image/png" sizes="16×16" href="./favicon-16×16.png">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <!-- This is a navigation bar -->
   
+    <!-- Навігаційна панель -->
     <nav class="navbar">
-        <ul class="nav-links">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="about.html">About</a></li>
-            <li class="nav-item"><a href="contact.html">Contact</a></li>
-            <li class="nav-item"><a href="gallery.html">Gallery</a></li>
-        </ul>
-            <!-- Блок авторизації (буде автоматично притиснутий праворуч) -->
-        <ul class="nav-links nav-auth">
-           <li class="nav-item"><a href="form-exit.html">Sign In</a></li>
-           <!-- Кнопку реєстрації можна стилізувати як акцентну кнопку-посилання -->
-           <li class="nav-item"><a href="form-reg.html" class="nav-btn-reg">Registration</a></li>
-        </ul>
+    <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="contact.html">Contact</a></li>
+        <li class="nav-item"><a href="gallery.html">Gallery</a></li>
+    </ul>
+    
+    <!-- Блок авторизації (буде автоматично притиснутий праворуч) -->
+    <ul class="nav-links nav-auth">
+        <li class="nav-item"><a href="form-exit.html">Sign In</a></li>
+        <!-- Кнопку реєстрації можна стилізувати як акцентну кнопку-посилання -->
+        <li class="nav-item"><a href="form-reg.html" class="nav-btn-reg">Registration</a></li>
+    </ul>
     </nav>
 
-    <header>
-        <h1>Welcome to My Portfolio</h1>
+    <header class="header">
+        <img src="./Image/logo.png" alt="Logo" class="header-logo">
+        <div class="header-content">
+            <h1 class="header-title">Welcome to My Portfolio</h1>
+            <p class="header-subtitle">Showcasing my work and projects</p>
+        </div>
     </header>
-    <main>
-        
-           <h2>Image jpg</h2>
 
-           <img src="./Image/img1.jpg" alt="Image 1" alt="Image 1">
-           <img src="./Image/img1.jpg" alt="Image 2" width="500" alt="Image 2">
-           <img src="./Image/img1.jpg" alt="Image 3" height="300" alt="Image 3">
-           <img src="./Image/img1.jpg" alt="Image 4" width="400" height="400" alt="Image 4">
-        
-            <h2>Image svg</h2>
+   <!-- основний вміст -->
+<main class="main">
+
+     <!-- ================= НУЛЬОВИЙ СЛАЙДЕР ================= -->
+    <!--<div class="gallery-container">-->
+             <!-- ДОДАЄМО ЗАГОЛОВОК ДЛЯ НУЛЬОВОГО СЛАЙДЕРА -->
+      <!-- <h1 class="slider-title">Мої проєкти</h1>
+        <div class="main-view-wrapper">
+            <button class="nav-btn prev-btn">❮</button>
+            <div class="main-view"> -->
+                <!-- Головне фото для картинок -->
+                <!--<img class="main-photo" src="/image/img01.jpeg" alt="Головне фото 01">-->
+                
+                <!-- Головне відео (за замовчуванням сховане) -->
+                <!--<video class="main-video hide" controls playsinline></video>
+            </div>
+            <button class="nav-btn next-btn">❯</button>
+        </div>
+        <div class="thumbnails-list">
+              <img class="thumb active" src="/image/img01.jpeg" data-large="/image/img01.jpeg" data-index="0" alt="Прев'ю 01">
+            <img class="thumb" src="/image/img02.jpeg" data-large="/image/img02.jpeg" data-index="1" alt="Прев'ю 02">
+            <img class="thumb" src="/image/img03.jpeg" data-large="/image/img03.jpeg" data-index="2" alt="Прев'ю 03">
+            <img class="thumb" src="/image/img04.jpeg" data-large="/image/img04.jpeg" data-index="3" alt="Прев'ю 04">
+            <img class="thumb" src="/image/img05.jpeg" data-large="/image/img05.jpeg" data-index="3" alt="Прев'ю 05">
+            <img class="thumb" src="/image/img06.jpeg" data-large="/image/img06.jpeg" data-index="3" alt="Прев'ю 06">
+            <img class="thumb" src="/image/img07.jpeg" data-large="/image/img07.jpeg" data-index="3" alt="Прев'ю 07">
+            <img class="thumb" src="/image/img08.jpeg" data-large="/image/img08.jpeg" data-index="3" alt="Прев'ю 08">
+        </div>
+    </div>-->
+
+    <!-- ================= ПЕРШИЙ СЛАЙДЕР ================= -->
+<div class="gallery-container">
+    <!-- ЗАГОЛОВОК ДЛЯ ПЕРШОГО СЛАЙДЕРА -->
+    <h1 class="slider-title">Співпраця з Коледжем</h1>
+    
+    <div class="main-view-wrapper">
+        <button class="nav-btn prev-btn">❮</button>
+        <div class="main-view">
+            <!-- Головне фото для картинок -->
+            <img class="main-photo" src="/image/img1.jpeg" alt="Головне фото 1">
             
-            <svg version="1.1" width="100" height="100" xmlns="http://www.w3.org">
-                <rect x="20" y="20" rx="20" width="100" height="100" style="fill:rgb(211, 144, 253);stroke:black;stroke-width:5"/>
-            </svg>
+            <!-- Головне відео з YouTube (за замовчуванням сховане, перенесено сюди) -->
+            <iframe class="main-youtube hide" width="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+            </iframe>
+        </div>
+        <button class="nav-btn next-btn">❯</button>
+    </div>
 
-            <svg version="1.1" width="200" height="200" xmlns="http://www.w3.org">
-                <circle cx="100" cy="70" r="60" style="fill:rgb(229, 216, 194);stroke:rgb(213, 138, 247);stroke-width:5"/>
-            </svg>
-            
-            <svg version="1.1"  xmlns="http://www.w3.org" width="5cm" height="5cm" viewBox="0 0 200 200">
-                <!-- Watch case -->
-                    <circle cx="100" cy="100" r="90" fill="#ffffff" stroke="#212529" stroke-width="6"/>
-  
-                <!-- Hour markers (12, 3, 6, 9) -->
-                    <line x1="100" y1="15" x2="100" y2="25" stroke="#212529" stroke-width="4" stroke-linecap="round"/>
-                    <line x1="185" y1="100" x2="175" y2="100" stroke="#212529" stroke-width="4" stroke-linecap="round"/>
-                    <line x1="100" y1="185" x2="100" y2="175" stroke="#212529" stroke-width="4" stroke-linecap="round"/>
-                    <line x1="15" y1="100" x2="25" y2="100" stroke="#212529" stroke-width="4" stroke-linecap="round"/>
-  
-                <!-- Numbers -->
-                    <text x="100" y="38" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#212529">12</text>
-                    <text x="167" y="106" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#212529">3</text>
-                    <text x="100" y="172" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#212529">6</text>
-                    text x="33" y="106" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#212529">9</text>
-  
-                <!-- Hour hand (pointing to 3) -->
-                    <line x1="100" y1="100" x2="140" y2="100" stroke="#212529" stroke-width="6" stroke-linecap="round"/>
-  
-                <!-- Minute hand (pointing to 12) -->
-                    <line x1="100" y1="100" x2="100" y2="38" stroke="#495057" stroke-width="4" stroke-linecap="round"/>
-  
-                <!-- Center -->
-                    <circle cx="100" cy="100" r="5" fill="rgb(211, 144, 253)"/>
-            </svg>
-    </main>
-    <!-- This is a footer -->
+    <!-- СПИСОК МІНІАТЮР (Тут тільки картинки-прев'ю!) -->
+    <div class="thumbnails-list">
+        <img class="thumb active" src="/image/img1.jpeg" data-large="/image/img1.jpeg" data-index="0" alt="Прев'ю 1">
+        <img class="thumb" src="/image/img2.jpeg" data-large="/image/img2.jpeg" data-index="1" alt="Прев'ю 2">
+        <img class="thumb" src="/image/img3.jpeg" data-large="/image/img3.jpeg" data-index="2" alt="Прев'ю 3">
+        <img class="thumb" src="/image/img4.jpeg" data-large="/image/img4.jpeg" data-index="3" alt="Прев'ю 4">
+        
+        <!-- Замість важкого тегу <video> ставимо легке прев'ю, а в data-large вставляємо embed-посилання вашого YouTube відео -->
+        <img class="thumb" src="/image/poster1.jpeg" data-large="https://youtube.com/embed/lMGsHAoToi8" data-index="4" alt="Прев'ю відео">
+    </div>
+</div>
 
-    <!-- footer start -->
+
+    <!-- ================= ДРУГИЙ СЛАЙДЕР ================= -->
+    <div class="gallery-container">
+             <!-- ДОДАЄМО ЗАГОЛОВОК ДЛЯ ПЕРШОГО СЛАЙДЕРА -->
+        <h1 class="slider-title">Співпраця з ErrConnect</h1>
+        <div class="main-view-wrapper">
+            <button class="nav-btn prev-btn">❮</button>
+            <div class="main-view">
+                <!-- Головне фото для картинок другого слайдера -->
+                <img class="main-photo" src="/image/img5.jpeg" alt="Головне фото 5">
+                
+                <!-- Головне відео другого слайдера (за замовчуванням сховане) -->
+                <video class="main-video hide" controls playsinline></video>
+            </div>
+            <button class="nav-btn next-btn">❯</button>
+        </div>
+        <div class="thumbnails-list">
+            <img class="thumb active" src="/image/img5.jpeg" data-large="/image/img5.jpeg" data-index="0" alt="Прев'ю 5">
+            <img class="thumb" src="/image/img6.jpeg" data-large="/image/img6.jpeg" data-index="1" alt="Прев'ю 6">
+            <img class="thumb" src="/image/img7.jpeg" data-large="/image/img7.jpeg" data-index="2" alt="Прев'ю 7">
+            <img class="thumb" src="/image/img8.jpeg" data-large="/image/img8.jpeg" data-index="3" alt="Прев'ю 8">
+            <img class="thumb" src="/image/img9.jpeg" data-large="/image/img9.jpeg" data-index="4" alt="Прев'ю 9">
+            <img class="thumb" src="/image/img10.jpeg" data-large="/image/img10.jpeg" data-index="5" alt="Прев'ю 10">
+            <img class="thumb" src="/image/img11.jpeg" data-large="/image/img11.jpeg" data-index="6" alt="Прев'ю 11">
+        </div>
+    </div>
+
+
+<!-- ================= ТРЕТІЙ СЛАЙДЕР ================= -->
+    <div class="gallery-container">
+             <!-- ДОДАЄМО ЗАГОЛОВОК ДЛЯ ПЕРШОГО СЛАЙДЕРА -->
+        <h1 class="slider-title">Співпраця з HeyBecca</h1>
+        <div class="main-view-wrapper">
+            <button class="nav-btn prev-btn">❮</button>
+            <div class="main-view">
+                <!-- Головне фото для картинок другого слайдера -->
+                <img class="main-photo" src="/image/img12.jpeg" alt="Головне фото 12">
+                
+                <!-- Головне відео другого слайдера (за замовчуванням сховане) -->
+                <video class="main-video hide" controls playsinline></video>
+            </div>
+            <button class="nav-btn next-btn">❯</button>
+        </div>
+        <div class="thumbnails-list">
+            <img class="thumb active" src="/image/img12.jpeg" data-large="/image/img12.jpeg" data-index="0" alt="Прев'ю 12">
+            <img class="thumb" src="/image/img13.jpeg" data-large="/image/img13.jpeg" data-index="1" alt="Прев'ю 13">
+            <img class="thumb" src="/image/img14.jpeg" data-large="/image/img14.jpeg" data-index="2" alt="Прев'ю 14">
+            <img class="thumb" src="/image/img15.jpeg" data-large="/image/img15.jpeg" data-index="3" alt="Прев'ю 15">
+            <img class="thumb" src="/image/img16.jpeg" data-large="/image/img16.jpeg" data-index="4" alt="Прев'ю 16">
+            <img class="thumb" src="/image/img17.jpeg" data-large="/image/img17.jpeg" data-index="5" alt="Прев'ю 17">
+            <img class="thumb" src="/image/img18.jpeg" data-large="/image/img18.jpeg" data-index="6" alt="Прев'ю 18">
+        </div>
+    </div>
+
+    <!-- Підключення JavaScript перенесено в самий кінець для правильної роботи -->
+    <script src="js/mains.js"></script>
+
+</main>
+
+
+
+    <!-- footer початок -->
     <footer class="footer">
-        <section class="footer-main">
+        
+<section class="footer-main">
             <div class="footer-main-item">
                 <h3 class="footer-title">About</h3>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-main-item">
                 <h3 class="footer-title">Contacts</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li>Ukraine</li>
+                    <li>Kyiv</li>
+                    <li>+380 63 475 79 99</li>
+                    <li>Helen.K@gmail.com</li>
                 </ul>
             </div>
             <div class="footer-main-item">
                 <h3 class="footer-title">Resources</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://code.visualstudio.com/">V.S.Code</a></li>
+                    <li><a href="https://www.jetbrains.com/webstorm/">WebStorm</a></li>
+                    <li><a href="https://www.w3.org/">w3</a></li>
+                    <li><a href="https://www.google.com/">Google</a></li>
                 </ul>
             </div>
-
         </section>
         <section class="footer-social">
             <div class="footer-social-list">
@@ -130,7 +212,7 @@
                     <a href="#">Privacy policy</a>
                 </li>
                 <li>
-                    &copy; 2026 My Website. All rights reserved.
+                    &copy; 2026 Helen.K Portfolio. All rights reserved.
                 </li>
             </ul>
 
@@ -138,7 +220,7 @@
 
 
     </footer>
-    <!-- footer end -->
+    <!-- footer кінець -->
     
     
 </body>

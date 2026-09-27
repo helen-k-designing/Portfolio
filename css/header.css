@@ -1,0 +1,112 @@
+/* ==========================================================================
+   1. КОМП'ЮТЕРНА ВЕРСІЯ ШАПКИ (Desktop Header — більше 1024px)
+   ========================================================================== */
+
+/* Головний контейнер всієї шапки сайту */
+header.header {
+   display: flex;                 /* Активує Flexbox для легкого вирівнювання елементів у лінію */
+   align-items: center;           /* Ідеально центрує логотип та текст по вертикалі шапки */
+   width: 100%;                   /* Змушує шапку займати рівно 100% ширини екрана */
+   padding: 24px 40px !important; /* Щедрі поля: 24px верх/низ та 40px по боках сторінки */
+   background-color: #aba5af;     /* Лавандово-сірий фоновий колір шапки */
+}
+
+/* Великий комп'ютерний логотип */
+.header-logo {
+   position: static !important;   /* ПОВНЕ ПРИЗЕМЛЕННЯ: логотип є частиною потоку і сам задає правильну висоту шапки */
+   width: 210px !important;       /* Фірмовий великий розмір ширини */
+   max-width: 210px !important;   
+   height: auto;                  /* Зберігає ідеальні графічні пропорції картинки */
+   border: none !important;                  
+   background: transparent !important;       
+}
+
+/* Контейнер для тексту заголовків */
+.header-content {
+   display: flex;
+   flex-direction: column;        /* Заголовки всередині контейнера йдуть строго один під одним */
+   align-items: center;           
+   text-align: center;            
+   flex-grow: 1;                  /* Змушує контейнер забрати весь вільний простір, що залишився */
+   margin-left: -210px;           /* МАГІЯ ЦЕНТРУВАННЯ: компенсуємо ширину логотипа, повертаючи центр тексту на середину монітора */
+   max-width: 100%;               
+}
+
+/* Головний великий заголовок та менший підзаголовок */
+.header-title { font-size: 2.2rem; color: #7122a3; margin: 0 0 14px 0; font-weight: 700; }
+.header-subtitle { font-size: 1.1rem; color: #3f3743; }
+
+
+/* ==========================================================================
+   2. ПРОМІЖНИЙ ФОРМАТ ДЛЯ ПЛАНШЕТІВ (Tablet — від 769px до 1024px)
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+   header.header {
+      display: grid !important;   /* Перемикаємо на Grid-сітку для складної триколоночної симетрії */
+      grid-template-columns: 20% 1fr 20% !important; /* Ліва і права колонки по 20%, а центр забирає весь залишок */
+      grid-template-rows: auto auto !important;
+      align-items: center !important;
+      padding: 20px !important;   /* Компактні планшетні поля */
+      min-height: 110px;
+   }
+
+   .header-logo {
+      position: static !important;
+      grid-column: 1 !important;  /* Саджаємо строго в ліву КОЛОНКУ №1 */
+      grid-row: 1 / span 2 !important; /* Логотип займає обидва ряди у висоту */
+      width: 100% !important;      
+      max-width: 130px !important; /* Обмеження, щоб на планшетах логотип не став гігантським */
+      height: auto !important;
+      transform: none !important;
+      margin: 0 !important;
+   }
+
+   .header-content {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      grid-column: 2 !important;  /* СТРОГО В ЦЕНТРАЛЬНУ КОЛОНКУ №2 */
+      grid-row: 1 / span 2 !important; 
+      max-width: 100% !important;   
+      margin-left: 0 !important;   /* ПОВНІСТЮ СКИДАЕМО ПАСТКУ КОМП'ЮТЕРНИХ МАРГІНІВ */
+      padding-left: 40px !important; /* Акуратний дизайнерський зсув тексту праворуч */
+   }
+
+   /* Оптимальні компактні розміри та відступи літер для планшетів */
+   .header-title { font-size: 1.7rem !important; margin: 0 0 8px 0 !important; color: #7122a3 !important; font-weight: 700; text-align: center !important; width: 100% !important; }
+   .header-subtitle { font-size: 0.95rem !important; color: #3f3743 !important; text-align: center !important; width: 100% !important; }
+}
+
+
+/* ==========================================================================
+   3. АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ЕКРАНІВ (Mobile — менше 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+   header.header {
+      display: grid !important;   /* На мобільних умикаємо двоколоночний компактний Grid */
+      grid-template-columns: auto 1fr; 
+      grid-template-rows: auto auto;   
+      gap: 4px 16px;              /* Щільні мікро-відступи між деталями */
+      padding: 12px 16px !important; 
+   }
+
+   /* Логотип на мобільних телефонах */
+   .header-logo {
+      grid-column: 1;             /* Стоїть строго ліворуч у першій колонці */
+      grid-row: 1 / span 2;       /* Займає обидва ряди, поки заголовки шикуються праворуч від нього */
+      width: 105px !important;    /* Компактний мобільний розмір плашки */
+      max-width: 105px !important;
+   }
+
+   .header-content {
+      display: contents !important; /* РУЙНУЄ КОНТЕЙНЕР: дозволяє Grid керувати кожним заголовком незалежно */
+      margin-left: 0 !important;   /* Скидаємо комп'ютерне поодиноке вирівнювання */
+   }
+
+   /* 1. БІЛЬШИЙ ЗАГОЛОВОК (Мобільний — притиснутий праворуч) */
+   header .header-title, header h1 { grid-column: 2 !important; grid-row: 1 !important; font-size: 1.25rem !important; text-align: right !important; margin: 0 !important; width: 100% !important; }
+   
+   /* 2. МЕНШИЙ ЗАГОЛОВОК (Мобільний — створює асиметрію ліворуч відносно правого краю) */
+   header .header-subtitle, header .header-content p { grid-column: 2 !important; grid-row: 2 !important; font-size: 0.75rem !important; text-align: left !important; margin: 0 !important; width: 100% !important; }
+}

@@ -1,113 +1,103 @@
 /* ==========================================================================
-   ОСНОВНИЙ КОНТЕЙНЕР ФУТЕРА (Підвал сайту)
+   1. КОМП'ЮТЕРНА ВЕРСІЯ ФУТЕРА (Базові стилі, посилання та заголовки)
    ========================================================================== */
+
+/* Головний контейнер підвалу */
 .footer {
-   background-color: var(--bgColor);     /* Встановлює той самий темний колір фону, що й у шапки сайту */
-   color: #c3bfcf ;                       /* Стриманий світло-сірий колір тексту футера (як рамки інпутів у формі) */ 
-   width: 100%;                          /* Забезпечує розтягування на повну ширину */
-   max-width: 100%;                      /* Запобігає появі горизонтального скролу сторінки */
-   border-top: 3px solid var(--accentColor); /* Додає тонку фірмову фіолетову лінію-акцент на самому верху футера */
+   width: 100%;
+   max-width: 100%;                      
+   background-color: var(--bgColor);     /* Темний фон із глобальних змінних */
+   color: #c3bfcf;                       /* Світло-сірий тон літер */
+   box-sizing: border-box;               /* Захист від появи скролу */
+   border-top: 3px solid var(--accentColor); /* Акцентна верхня лінія */
 }
 
-/* Скидання стилів для всіх списків посилань у футері */
-.footer ul {
-   list-style: none;                     /* Повністю прибирає стандартні маркерні крапки списків */
-   padding-left: 0;                      /* Видаляє стандартний внутрішній відступ ліворуч */
-   margin: 0;                            /* Скидає зовнішні відступи */
+/* Очищення базових списків та посилань меню */
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer a { color: #c3bfcf; text-decoration: none; font-size: 0.95rem; }
+.footer a:hover { color: #d08bfb; }    /* Лавандовий ховер */
+
+/* Головні заголовки колонок футера */
+.footer-title {
+   font-size: 1.15rem;                   
+   font-weight: 600;                     
+   color: #d08bfb;                       
+   margin-bottom: 16px;                  
 }
 
-/* Загальні стилі для текстових посилань у футері */
-.footer a {
-   color: #c3bfcf;                       /* Стриманий світло-сірий колір посилань (як рамки інпутів у формі) */
-   text-decoration: none;                /* Прибирає стандартне нижнє підкреслення посилань */
-   font-size: 0.95rem;                   /* Оптимальний розмір шрифту для нижнього меню */
-}
-
-/* Ефект підсвічування посилань при наведенні курсору */
-.footer a:hover {
-   color: var(--accentColor);            /* Плавно змінює колір посилання на ваш фірмовий яскраво-фіолетовий */
-}
-
-/* ==========================================================================
-   ГОЛОВНА СЕКЦІЯ ФУТЕРА (Блок з колонками посилань)
-   ========================================================================== */
+/* Сітка з трьох колонок на моніторах */
 .footer-main {
-   display: flex;                        /* Активує Flexbox, щоб вибудувати колонки в один горизонтальний рядок */
-   justify-content: space-between;       /* Рівномірно розподіляє колонки, притискаючи крайні до лівого та правого боків */
-   gap: 40px;                            /* Задає фіксовану відстань між сусідніми колонками контенту */
-   max-width: 1200px;                    /* Обмежує максимальну ширину контенту для великих моніторів */
-   margin: 0 auto;                       /* Центрує весь блок контенту по горизонталі */
-   padding: 50px 24px;                   /* Внутрішні відступи: 50px зверху/знизу та 24px по боках для простору */
+   display: grid;
+   grid-template-columns: repeat(3, 1fr); 
+   gap: 40px;                            
+   max-width: 1200px;                    
+   margin: 0 auto;                       
+   padding: 50px 24px;                   
 }   
 
-/* Заголовки колонок у футері (About, Contacts, Resources) */
-.footer-title {
-   font-size: 1.15rem;                   /* Злегка збільшений розмір для візуальної ієрархії */
-   margin-bottom: 16px;                  /* Відступ від заголовка колоночки до її посилань */
-   color: #ecdefa;                       /* Заголовки пофарбовані у ніжний пастельно-лавандовий колір форми */
-   font-weight: 600;                     /* Напівжирне накреслення літер для виділення */
-}
+/* Вирівнювання колонок у ряд: Ліворуч | По центру | Праворуч */
+.footer-main > *:nth-child(1) { text-align: left; }
+.footer-main > *:nth-child(2) { text-align: center; }
+.footer-main > *:nth-child(3) { text-align: right; }
 
-/* Відступи між пунктами списку в колонках */
-.footer-main ul li {
-   margin-bottom: 12px;                  /* Створює комфортну вертикальну відстань між посиланнями */
-}
+/* Вертикальні Flexbox-списки всередині стовпчиків */
+.footer-main > * ul { display: flex; flex-direction: column; }
+.footer-main > *:nth-child(1) ul { align-items: flex-start; } 
+.footer-main > *:nth-child(2) ul { align-items: center; }     
+.footer-main > *:nth-child(3) ul { align-items: flex-end; }   
+.footer-main ul li { margin-bottom: 12px; }
 
-/* ==========================================================================
-   БЛОК СОЦІАЛЬНИХ МЕРЕЖ (Контейнер та горизонтальний список)
-   ========================================================================== */
-
-/* Батьківська секція для соцмереж */
+/* Блок круглих кнопок соцмереж */
 .footer-social {
-   display: flex;                        /* Вмикає Flexbox для центрування всього блоку на сторінці */
-   justify-content: center;              /* Центрує весь блок із соцмережами по горизонталі */
-   align-items: center;                  /* Вирівнює вміст по вертикалі */
-   padding-top: 25px;                    /* Відокремлює зону соцмереж від основних колонок футера */
-   border-top: 1px solid rgba(236, 222, 250, 0.1); /* Ледь помітна тонка лінія над соцмережами */
+   display: flex;                        
+   justify-content: center;              
+   align-items: center;                  
+   padding-top: 25px;                    
+   border-top: 1px solid rgba(236, 222, 250, 0.1); 
 }
 
-/* САМИЙ СПИСОК ІКОНОК (Тег <ul>, де лежать іконки) */
-.footer-social-list {
-   display: flex;                        /* ВАЖЛИВО: Вишиковує всі іконки (елементи <li>) в один горизонтальний рядок */
-   flex-direction: row;                  /* Явно вказує напрямок рядка (зліва направо) */
-   justify-content: center;              /* Центрує іконки всередині рядка */
-   align-items: center;                  /* Вирівнює іконки строго по центру по вертикальній осі */
-   gap: 16px;                            /* Створює фіксований комфортний відступ між сусідніми іконками */
-   list-style: none;                     /* Гарантує, що у списку іконок не буде маркерних крапок */
-   padding: 0;                           /* Очищає внутрішні відступи списку */
-   margin: 0;                            /* Очищає зовнішні відступи списку */
-}
-
-/* СТИЛІЗАЦІЯ ОКРЕМИХ КРУГЛИХ КНОПОК-ІКОНОК (Тег <a>) */
+/* Сучасні кнопки-іконки з ефектом матового скла */
+.footer-social-list { display: flex; gap: 16px; }
 .footer-social-list a {
-   display: flex;                        /* Перетворює посилання на флекс-контейнер для центрування іконки всередині */
-   justify-content: center;              /* Центрує іконку (SVG або шрифт) по горизонталі всередині кружечка */
-   align-items: center;                  /* Центрує іконку по вертикалі всередині кружечка */
-   width: 40px;                          /* Фіксована ширина круглої кнопки */
-   height: 40px;                         /* Фіксована висота круглої кнопки */
-   background-color: rgba(255, 255, 255, 0.05); /* Напівпрозорий білий фон для ефекту сучасного скла */
-   border: 1px solid rgba(195, 191, 207, 0.2); /* Тонка світла рамка в колірній гамі сайту */
-   border-radius: 50%;                   /* Робить форму кнопки ідеально круглою */
-   color: white;                         /* Колір самої іконки — білий */
-   transition: all 0.2s ease;            /* Налаштовує плавність 0.2-секундної анімації для ховер-ефекту */
+   display: flex; justify-content: center; align-items: center;                  
+   width: 40px; height: 40px; border-radius: 50%; color: white;                         
+   background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(195, 191, 207, 0.2); 
+}
+.footer-social-list a:hover {
+   background-color: var(--accentColor); border-color: var(--accentColor);     
+   transform: translateY(-3px); box-shadow: 0 4px 12px rgba(126, 87, 194, 0.35); 
 }
 
-/* Ефект наведення на кнопку соцмережі */
-.footer-social-list a:hover {
-   background-color: var(--accentColor); /* Фарбує круглу кнопку у ваш фірмовий яскраво-фіолетовий колір */
-   border-color: var(--accentColor);     /* Змінює колір рамки на фіолетовий */
-   transform: translateY(-3px);          /* Ефект «підстрибування»: кнопка м'яко піднімається на 3px вгору */
-   box-shadow: 0 4px 12px rgba(126, 87, 194, 0.35); /* Додає м'яке фіолетове свічення під активною кнопкою */
+/* Нижній текст захисту прав (Копірайт) */
+.footer-legal { text-align: center; font-size: 0.85rem; color: #8c8599; padding: 24px 20px; }
+
+
+/* ==========================================================================
+   2. ПРОМІЖНИЙ ФОРМАТ ДЛЯ ПЛАНШЕТІВ (від 769px до 1024px)
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+   .footer-main { padding: 30px 20px !important; gap: 20px !important; }
+   .footer-main a, .footer-main li, .footer-title { font-size: 0.88rem !important; }
+   .footer-main ul li { margin-bottom: 8px !important; }
+   .footer-social-list { gap: 12px !important; }
 }
 
 
 /* ==========================================================================
-   ЮРИДИЧНИЙ БЛОК (Копірайт та корисна інформація)
+   3. МІКРО-ФОРМАТ ДЛЯ МОБІЛЬНИХ СМАРТФОНІВ (менше 768px)
    ========================================================================== */
-.footer-legal {
-   text-align: center;                   /* Вирівнює текст копірайту чітко по центру сторінки */
-   font-size: 0.85rem;                   /* Зменшує розмір шрифту юридичних даних */
-   color: #8c8599;                       /* Приглушений фіолетово-сірий відтінок тексту */
-   margin-top: 0;                        /* Обнуляє зовнішній відступ */
-   padding: 24px 20px;                   /* Внутрішній простір для фінального блоку сторінки */
+@media (max-width: 768px) {
+   /* Стискання сітки підвалу */
+   .footer-main { gap: 8px !important; padding: 16px 12px !important; }
+   .footer-main ul li { margin-bottom: 4px !important; }
+
+   /* Компактні мобільні масштаби шрифтів */
+   .footer a, .footer-main li { font-size: 0.72rem !important; }
+   .footer-title { font-size: 0.85rem !important; margin-bottom: 8px !important; white-space: nowrap; }
+   .footer a { word-break: break-all; } /* Захист від розпирання довгою поштою */
+
+   /* Охайні мікро-кнопки соцмереж та копірайт */
+   .footer-social { padding-top: 12px !important; margin: 0 12px !important; }
+   .footer-social-list a { width: 30px !important; height: 30px !important; font-size: 11px !important; }
+   .footer-legal { padding: 12px 10px !important; font-size: 0.68rem !important; }
 }

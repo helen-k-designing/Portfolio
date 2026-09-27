@@ -1,6 +1,29 @@
+/* ==========================================================================
+   1. ПІДКЛЮЧЕННЯ ЗОВНІШНІХ БІБЛІОТЕК ТА МОДУЛІВ СТИЛІВ
+   ========================================================================== */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css");
 @import url("./main.css");
 @import url("./nav.css");
 @import url("./footer.css");
+@import url("./header.css");
+@import url("./body.css");
+
+/* ==========================================================================
+   2. ТЕХНІЧНА РЕЄСТРАЦІЯ ЛОКАЛЬНОГО ШРИФТУ
+   ========================================================================== */
+@font-face {
+   font-family: 'Nunito-Bold';
+   src: url('../fonts/nunito/Nunito-Bold.ttf') format('truetype'); 
+   font-weight: 400;                  
+   font-style: normal;                
+   font-display: swap;                
+}
+
+/* ==========================================================================
+   3. ГЛОБАЛЬНИЙ ЗАХИСТ ВІД СИНІХ РАМОК ФОКУСУ БРАУЗЕРА
+   ========================================================================== */
+.nav-item a:focus {
+   outline: none !important;        /* Повністю вимикає синій дефолтний контур довкола посилань */
+   box-shadow: none !important;     /* Блокує появу тіні, яку Chrome іноді малює при кліку */
+}
