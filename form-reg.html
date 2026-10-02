@@ -1,91 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
+    
+    <!-- Підключення іконок для вкладки браузера -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="apple-touch-icon" sizes="180×180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32×32" href="./favicon-32×32.png">
     <link rel="icon" type="image/png" sizes="16×16" href="./favicon-16×16.png">
-    <link rel="stylesheet" href="./css/form-reg.css"> 
+    <!-- Підключення зовнішнього файлу стилів форми реєстрації -->
+    <link rel="stylesheet" href="./css/form-reg.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Підключення файлу логіки JavaScript. Атрибут 'defer' гарантує, 
+         що код запрацює тільки після того, як браузер завантажить усі теги -->
+    <script src="./js/form-reg.js" defer></script>
 </head>
 <body>
    <main>
-    <div class="login-container">
-        <header class="login-header">
-            <h2>Registration</h2>
-            <p style="color: #5c5270; font-size: 0.9rem; margin-top: 4px;">Fill in your profile details</p>
-        </header>
+    <!-- Головна кнопка на сторінці, яка відкриває вікно реєстрації -->
+    <button id="openModalBtn" class="action-btn">Open Registration</button>
 
-        <form action="#" method="POST">
-            <!-- РЯДОК 1: Прізвище та Ім'я -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <div class="input-wrapper">
-                        <input name="lastName" id="lastName" type="text" autocomplete="family-name" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <div class="input-wrapper">
-                        <input name="firstName" id="firstName" type="text" autocomplete="given-name" />
-                    </div>
-                </div>
-            </div>
+    <!-- Підкладка модального вікна (Modal Overlay) — затемнює фон сайту -->
+    <div id="modalOverlay" class="modal-overlay">
+        
+        <!-- Картка форми реєстрації (великий лавандовий блок) -->
+        <div class="login-container">
+            
+            <!-- Шапка форми із заголовком. Інлайнові стилі видалено для чистоти коду -->
+            <header class="login-header">
+                <h2>Registration</h2>
+                <p class="login-subheading">Fill in your profile details</p>
+            </header>
 
-            <!-- РЯДОК 2: Електронна адреса та Телефон -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <div class="input-wrapper">
-                        <input name="email" id="email" type="email" autocomplete="off" />
+            <!-- Тег форми. Атрибути action та method видалено, щоб сервер не видавав помилку 405.
+                 Атрибут 'novalidate' відключає дефолтні підказки браузера для нашої кастомної валідації -->
+            <form id="registrationForm" autocomplete="off" novalidate>
+                
+                <!-- РЯДОК 1: Прізвище та Ім'я -->
+                <div class="form-row">
+                    <!-- Ліва колонка -->
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <div class="input-wrapper">
+                            <input name="lastName" id="lastName" type="text" autocomplete="family-name" required />
+                        </div>
+                        <span class="error-message" id="lastNameError"></span>
+                    </div>
+                    <!-- Права колонка -->
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <div class="input-wrapper">
+                            <input name="firstName" id="firstName" type="text" autocomplete="given-name" required />
+                        </div>
+                        <span class="error-message" id="firstNameError"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number:</label>
-                    <div class="input-wrapper">
-                        <input type="tel" id="phone" name="phone" placeholder="+380..." required autocomplete="off">
-                    </div>
-                </div>
-            </div>
 
-            <!-- РЯДОК 3: Пароль та Підтвердження пароля -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+                <!-- РЯДОК 2: Електронна адреса та Телефон -->
+                <div class="form-row">
+                    <!-- Ліва колонка -->
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <div class="input-wrapper">
+                            <input name="email" id="email" type="email" autocomplete="off" required />
+                        </div>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <!-- Права column -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="phone" name="phone" placeholder="+380..." required autocomplete="off">
+                        </div>
+                        <span class="error-message" id="phoneError"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your password" required>
+
+                <!-- РЯДОК 3: Пароль та Підтвердження пароля -->
+                <div class="form-row">
+                    <!-- Ліва колонка -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+                            
+                            <!-- Кнопка «Око» для першого поля пароля. type="button" захищає від перезавантаження -->
+                            <button type="button" class="toggle-password" data-target="password" aria-label="Show password" tabindex="-1">
+                                <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                                <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                        </div>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+                    <!-- Права колонка -->
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="input-wrapper password-wrapper">
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your password" required>
+                            
+                            <!-- Кнопка «Око» для другого поля пароля -->
+                            <button type="button" class="toggle-password" data-target="confirm-password" aria-label="Show confirm password" tabindex="-1">
+                                <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                                <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                        </div>
+                        <span class="error-message" id="confirmPasswordError"></span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Стать (Перемикач жінка / чоловік) -->
-            <div class="form-group">
-                <p>Gender</p>
-                <div class="gender-wrapper">
-                    <label class="gender-option">
-                        <input type="radio" name="gender" value="female" required>
-                        <span>Female</span>
-                    </label>
-                    <label class="gender-option">
-                        <input type="radio" name="gender" value="male">
-                        <span>Male</span>
-                    </label>
+                <!-- Блок вибору Статі. name="gender" об'єднує їх в одну групу нативно.
+                     tabindex="0" на Male змушує клавішу Tab заходити на обидва варіанти -->
+                <div class="form-group">
+                    <p class="gender-title">Gender</p>
+                    <div class="gender-wrapper">
+                        <label class="gender-option">
+                            <input type="radio" id="genderFemale" name="gender" value="female" required>
+                            <span>Female</span>
+                        </label>
+                        <label class="gender-option">
+                            <input type="radio" id="genderMale" name="gender" value="male" tabindex="0">
+                            <span>Male</span>
+                        </label>
+                    </div>
+                    <span class="error-message" id="genderError"></span>
                 </div>
-            </div>
 
-            <!-- Кнопка реєстрації -->
-            <button type="submit" class="login-btn">Register</button>
-        </form>
+                <!-- Головна кнопка реєстрації -->
+                <button type="submit" class="login-btn">Register</button>
+            </form>
+
+            <!-- Кнопка-хрестик для швидкого закриття. Розташована в самому кінці коду,
+                 тому при натисканні Tab вона сфокусується останньою -->
+            <button type="button" id="closeModalBtn" class="close-modal-btn" aria-label="Close registration form">&times;</button>
+        </div>
     </div>
 </main>
-
 </body>
 </html>

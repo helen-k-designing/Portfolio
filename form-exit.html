@@ -4,54 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login page</title>
+    
+     <!-- Підключення іконок для вкладки браузера -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="apple-touch-icon" sizes="180×180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32×32" href="./favicon-32×32.png">
     <link rel="icon" type="image/png" sizes="16×16" href="./favicon-16×16.png">
-    <link rel="stylesheet" href="css/form-exit.css">
+    <!-- Підключення зовнішнього файлу стилів форми реєстрації -->
+    <link rel="stylesheet" href="./css/form-exit.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Підключення файлу логіки JavaScript. Атрибут 'defer' змушує скрипт 
+         зачекати, поки браузер повністю побудує всі HTML-теги на сторінці -->
+    <script src="js/form-exit.js" defer></script>
 </head>
 <body>
-   <div class="login-container">
-        <div class="close-form-btn">
-       <div class="login-card">
-        <div class="login-header">
-            <h2>Welcome Back</h2>
-            <p>Please enter your email and password to log in.</p>
-        </div>
-            <form action="/login" method="POST" id="loginForm" class="login-form" 
-            autocomplete="off" novalidate>
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <label for="email">Email:</label>
-                        <input name="email" id="email" type="email" autocomplete="off" />
-                </div>
-                </div>
-                <span class="error-message" id="emailError"></span>
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                </div>
-                <span class="error-message" id="passwordError"></span>
-                <div class="form-options remember-me">
-                    <div class="remember-wrapper">
-                    <input type="checkbox" id="rememberMe" name="rememberMe">
-                    <label for="rememberMe">Remember Me</label>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-            </form>
+   <main>
+    <!-- Кнопка на головній сторінці сайту, яка буде викликати модальне вікно -->
+    <button id="openModalBtn" class="action-btn">Open Login</button>
 
-            <div class="divaider"></div>
-               <span class="login-with">Or login with</span>
-            <div class="soc-options">
-                <button class="google-login">Google</button>
-                <button class="github-login">GitHub</button>
+    <!-- Головна напівпрозора підкладка (оверлей) модального вікна -->
+    <div id="modalOverlay" class="modal-overlay">
+        
+       <!-- Білий або пастельний контейнер (картка), де лежать усі елементи -->
+       <div class="login-container">
+            <div class="login-card">
+                
+                <!-- Шапка форми із заголовком та підказом для користувача -->
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please enter your email and password to log in.</p>
+                </div>
+                
+                <!-- Тег форми. Атрибут 'novalidate' відключає стандартні спливаючі 
+                     бульбашки браузера, щоб ми могли робити власні красиві коментарі -->
+                <form id="loginForm" class="login-form" autocomplete="off" novalidate>
+                    
+                    <!-- Блок для введення Електронної пошти -->
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <div class="input-wrapper">
+                            <input name="email" id="email" type="email" autocomplete="off" required />
+                        </div>
+                        <!-- Сюди додаємо span для виведення червоного коментаря помилки через JS -->
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    
+                    <!-- Блок для введення Пароля -->
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <!-- Клас password-wrapper потрібен, щоб поставити іконку ока всередину поля -->
+                        <div class="input-wrapper password-wrapper">
+                            <input type="password" id="password" name="password" required>
+                            
+                            <!-- Кнопка «Око». type="button" захищає від перезавантаження форми. 
+                                 tabindex="-1" робить так, щоб клавіша Tab перестрибувала цю кнопку -->
+                            <button type="button" class="toggle-password" data-target="password" aria-label="Show password" tabindex="-1">
+                                <!-- SVG-іконка закритого ока (відображається спочатку) -->
+                                <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                                <!-- SVG-іконка відкритого ока (прихована за замовчуванням класом hidden) -->
+                                <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                        </div>
+                        <!-- Сюди додаємо span для виведення червоного коментаря помилки пароля -->
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+                    
+                    <!-- Чекбокс «Запам'ятати мене» -->
+                    <div class="form-options remember-me">
+                        <div class="remember-wrapper">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe">Remember Me</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Група головних кнопок форми: submit надсилає, button — просто скасовує дію -->
+                    <div class="form-actions-group">
+                        <button type="submit" class="login-btn">Увійти</button>
+                        <button type="button" id="cancelModalBtn" class="cancel-btn">Відмінити</button>
+                    </div>
+                </form>
+
+                <!-- Горизонтальний роздільник між звичайною та соціальною авторизацією -->
+                <div class="divider-container">
+                    <div class="divider-line"></div>
+                    <span class="login-with">Or login with</span>
+                </div>
+                
+                <!-- Допоміжні кнопки авторизації через Google та GitHub -->
+                <div class="soc-options">
+                    <button type="button" class="google-login">Google</button>
+                    <button type="button" class="github-login">GitHub</button>
+                </div>
+                
+                <!-- Нижні навігаційні посилання сторінки -->
+                <div class="footer-links">
+                    <a href="/forgot-password">Forgot Password?</a>
+                    <a href="form-reg.html">Don't have an account? Register</a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="/forgot-password">Forgot Password?</a>
-                <a href="form-reg.html" class="nav-btn-reg">Don't have an account? Register</a>
-            </div>
+            
+            <!-- Кнопка-хрестик для швидкого закриття. Вона стоїть в самому кінці коду картки,
+                 тому при натисканні Tab користувач пройдеться по ній в останню чергу -->
+            <button type="button" id="closeModalBtn" class="close-modal-btn" aria-label="Close login form">&times;</button>
         </div>
     </div>
+</main>
 </body>
 </html>
