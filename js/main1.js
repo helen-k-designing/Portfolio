@@ -61,6 +61,7 @@ function toggleMode() {
         console.log("Переключено тему сайту: повернуто СВІТЛИЙ режим.");
     }
 }
+btnLight.addEventListener('click', toggleMode);
 btnDark.addEventListener('click', toggleMode);
 
 
