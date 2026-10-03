@@ -1,44 +1,37 @@
 /**
- * Клас для керування інтерактивною галереєю-слайдером.
- * Створює ізольовану логіку для кожного окремого блоку на сторінці.
+ * Клас для керування слайдером (підтримує фото та YouTube відео)
  */
 class GallerySlider {
   constructor(containerElement) {
-    this.container = containerElement;
-    
-    if (!this.container) {
-      console.error(`[ПОМИЛКА] Переданий контейнер слайдера не існує в DOM!`);
-      return;
-    }
+    // Якщо контейнер не передано в функцію — зупиняємо роботу
+    if (!containerElement) return;
 
-    this.sliderId = this.container.id || `Slider-${Math.floor(Math.random() * 1000)}`;
-    console.log(`%c[ІНІЦІАЛІЗАЦІЯ] Початок збірки для: ${this.sliderId}`, 'color: #8f31c9; font-weight: bold;');
-    
-    // Знаходимо всі робочі DOM-елементи ТІЛЬКИ всередині цього контейнера
+    this.container = containerElement;
+    this.currentIndex = 0; // Номер поточного слайда
+    this.isHovered = false; // Чи знаходиться курсор над слайдером
+    this.fadeTimeout = null; // Сюди записуватимемо таймер анімації
+
+    // Знаходимо всі потрібні елементи всередині нашого контейнера
     this.mainPhoto = this.container.querySelector('.main-photo');
-    this.mainYoutube = this.container.querySelector('.main-youtube'); // 🎥 Наш оновлений YouTube плеєр
+    this.mainYoutube = this.container.querySelector('.main-youtube');
     this.thumbnails = this.container.querySelectorAll('.thumb');
     this.prevBtn = this.container.querySelector('.prev-btn');
     this.nextBtn = this.container.querySelector('.next-btn');
     this.thumbnailsContainer = this.container.querySelector('.thumbnails-list');
-    
-    if (!this.prevBtn || !this.nextBtn) {
-      console.warn(`[УВАГА] [${this.sliderId}] Стрілочки навігації відсутні в HTML!`);
-    }
 
-    this.currentIndex = 0; 
-    this.isHovered = false; 
-    
+    // Запускаємо налаштування подій та фонове завантаження картинок
     this.initEvents();
-    this.preloadImages(); // 🖼️ Запускаємо фонову підгрузку картинок від миготіння білого фону
-    console.log(`[ОК] [${this.sliderId}] Успішно підключено події. Кількість знайдених прев'ю: ${this.thumbnails.length}`);
+    this.preloadImages();
   }
 
-  /* Фонове завантаження великих зображень у кеш браузера для плавності переходів*/
+  /**
+   * Фонове завантаження великих фото, щоб вони не миготіли білим при першому показі
+   */
   preloadImages() {
     this.thumbnails.forEach(thumb => {
       const url = thumb.getAttribute('data-large');
-      if (url && !url.includes('youtube.com') && !url.includes('youtu.be') && !url.includes('embed')) {
+      // Якщо це посилання на фото (не відео) — змушуємо браузер завантажити його в кеш
+      if (url && !url.includes('youtube.com') && !url.includes('youtu.be')) {
         const img = new Image();
         img.src = url;
       }
@@ -46,110 +39,85 @@ class GallerySlider {
   }
 
   /**
-   * Головний метод оновлення контенту у великому вікні плеєра.
+   * Головний метод зміни слайда
    */
   updateGallery(index) {
-    console.log(`[ОНОВЛЕННЯ] [${this.sliderId}] Запуск зміни слайда на індекс: ${index}`);
-    
-    // КРОК 1: Запускаємо анімацію плавного зникнення (Тепер без помилок, з mainYoutube)
-    [this.mainPhoto, this.mainYoutube].forEach(media => {
-      if (media) media.style.opacity = '0';
-    });
-    
-    // КРОК 2: Чекаємо 150мс, поки медіа згасне, і міняємо джерело файлу
-    setTimeout(() => {
+    // Скасовуємо попередній таймер зміни слайда, якщо користувач клікає дуже швидко
+    if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
+
+    // Робимо поточні медіа-елементи прозорими (початок анімації зникнення)
+    if (this.mainPhoto) this.mainPhoto.style.opacity = '0';
+    if (this.mainYoutube) this.mainYoutube.style.opacity = '0';
+
+    // Чекаємо 150мс, поки згасне старий слайд, і вмикаємо новий
+    this.fadeTimeout = setTimeout(() => {
       this.currentIndex = index;
       const activeThumb = this.thumbnails[this.currentIndex];
-      
-      if (!activeThumb) {
-        console.error(`[ПОМИЛКА] [${this.sliderId}] Неможливо знайти прев'ю для індексу ${index}`);
-        return;
-      }
+      if (!activeThumb) return;
 
-      const mediaUrl = activeThumb.getAttribute('data-large');
-      const isYouTube = mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be') || mediaUrl.includes('embed');
+      const mediaUrl = activeThumb.getAttribute('data-large') || '';
+      const isYouTube = mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be');
 
-      console.log(`[МЕДІА] [${this.sliderId}] Завантажується тип: ${isYouTube ? 'ВІДЕО (YouTube)' : 'ФОТО'}. Шлях: ${mediaUrl}`);
-
-      // Примусово очищуємо і ховаємо плеєр YouTube, щоб зупинити звук при переході на фото
+      // Налаштовуємо видимість елементів залежно від типу медіа (Фото чи Відео)
       if (this.mainYoutube) {
-        this.mainYoutube.src = ""; 
-        this.mainYoutube.classList.add('hide');
+        this.mainYoutube.src = isYouTube ? mediaUrl : ''; // Очищуємо src для відео, щоб вимкнути звук
+        this.mainYoutube.classList.toggle('hide', !isYouTube);
+        if (isYouTube) this.mainYoutube.style.opacity = '1';
       }
 
-      if (isYouTube) {
-        // 🎥 ЛОГІКА ВІДЕО YOUTUBE
-        if (this.mainPhoto) this.mainPhoto.classList.add('hide');
-        if (this.mainYoutube) {
-          this.mainYoutube.classList.remove('hide');
-          this.mainYoutube.src = mediaUrl;
-          this.mainYoutube.style.opacity = '1'; 
-        }
-      } else {
-        // 🖼️ ЛОГІКА ФОТО
-        if (this.mainPhoto) {
-          this.mainPhoto.classList.remove('hide');
-          this.mainPhoto.src = mediaUrl;
-          this.mainPhoto.style.opacity = '1'; 
-        }
+      if (this.mainPhoto) {
+        this.mainPhoto.src = isYouTube ? '' : mediaUrl;
+        this.mainPhoto.classList.toggle('hide', isYouTube);
+        if (!isYouTube) this.mainPhoto.style.opacity = '1';
       }
 
-      // КРОК 3: Оновлюємо активний клас мініатюр
+      // Оновлюємо підсвітку активної мініатюри внизу
       this.thumbnails.forEach(t => t.classList.remove('active'));
       activeThumb.classList.add('active');
-      console.log(`[УСПІХ ОНОВЛЕННЯ] [${this.sliderId}] Слайд успішно активовано.`);
     }, 150);
   }
 
   /**
-   * Перемикання на наступний слайд (циклічний алгоритм).
+   * Перемикання на наступний слайд по колу
    */
   next() {
     const nextIndex = (this.currentIndex + 1) % this.thumbnails.length;
-    console.log(`[ЛОГІКА ВПЕРЕД] [${this.sliderId}] Поточний: ${this.currentIndex} -> Наступний: ${nextIndex}`);
     this.updateGallery(nextIndex);
   }
-  
+
   /**
-   * Перемикання на попередній слайд (циклічний алгоритм).
+   * Перемикання на попередній слайд по колу
    */
   prev() {
     const prevIndex = (this.currentIndex - 1 + this.thumbnails.length) % this.thumbnails.length;
-    console.log(`[ЛОГІКА НАЗАД] [${this.sliderId}] Поточний: ${this.currentIndex} -> Попередній: ${prevIndex}`);
     this.updateGallery(prevIndex);
   }
 
   /**
-   * Налаштування всіх обробників подій (кліки, наведення миші, клавіатура).
+   * Налаштування кліків та керування клавіатурою
    */
   initEvents() {
-    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
-    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
-    
-    if (this.thumbnailsContainer) {
-      this.thumbnailsContainer.addEventListener('click', (event) => {
-        const targetThumb = event.target.closest('.thumb');
-        if (targetThumb && this.thumbnailsContainer.contains(targetThumb)) {
-          const clickedIndex = Number(targetThumb.getAttribute('data-index'));
-          console.log(`[КЛІК МІНІАТЮРИ] [${this.sliderId}] Натиснуто на прев'ю з індексом: ${clickedIndex}`);
-          this.updateGallery(clickedIndex);
-        }
-      });
-    }
+    // Кліки по стрілочках
+    this.nextBtn?.addEventListener('click', () => this.next());
+    this.prevBtn?.addEventListener('click', () => this.prev());
 
-    this.container.addEventListener('mouseenter', () => {
-      this.isHovered = true;
-      console.log(`[ФОКУС] Курсор ЗАЙШОВ у зону: ${this.sliderId}. Клавіатура активна.`);
+    // Клік по мініатюрах (використовуємо делегування подій для економії пам'яті)
+    this.thumbnailsContainer?.addEventListener('click', (event) => {
+      const targetThumb = event.target.closest('.thumb');
+      if (targetThumb && this.thumbnailsContainer.contains(targetThumb)) {
+        const clickedIndex = Number(targetThumb.getAttribute('data-index'));
+        this.updateGallery(clickedIndex);
+      }
     });
 
-    this.container.addEventListener('mouseleave', () => {
-      this.isHovered = false;
-      console.log(`[ФОКУС] Курсор ВИЙШОВ із зони: ${this.sliderId}. Клавіатура вимкнена.`);
-    });
+    // Стежимо, чи мишка знаходиться над слайдером (для роботи клавіатури)
+    this.container.addEventListener('mouseenter', () => this.isHovered = true);
+    this.container.addEventListener('mouseleave', () => this.isHovered = false);
 
+    // Керування стрілочками клавіатури (вліво / вправо)
     document.addEventListener('keydown', (event) => {
-      if (!this.isHovered) return; 
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if (!this.isHovered) return; // Якщо мишка не над слайдером — ігноруємо
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return; // Ігноруємо, якщо користувач пише текст
 
       if (event.key === 'ArrowRight') this.next();
       if (event.key === 'ArrowLeft') this.prev();
@@ -157,20 +125,9 @@ class GallerySlider {
   }
 }
 
-// ==========================================================================
-// ГОЛОВНИЙ СТАРТ СИСТЕМИ ТА СИНХРОНІЗАЦІЯ З DOM
-// ==========================================================================
+// Запуск усіх слайдерів на сторінці після повного завантаження HTML
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("%c[ЗАПУСК СИСТЕМИ] HTML повністю завантажено. Пошук галерей...", "color: #00aa00; font-weight: bold;");
-  
-  const galleryContainers = document.querySelectorAll('.gallery-container');
-  
-  galleryContainers.forEach((container, iterationIndex) => {
-    if (!container.id) {
-       container.id = `Gallery-Block-${iterationIndex + 1}`;
-    }
+  document.querySelectorAll('.gallery-container').forEach((container) => {
     new GallerySlider(container);
   });
-  
-  console.log(`%c[ЗАВЕРШЕНО] Усі слайдери (${galleryContainers.length} шт.) успішно запущені!`, "color: #00aa00; font-weight: bold;");
 });
