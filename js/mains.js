@@ -34,7 +34,16 @@ class GallerySlider {
     console.log(`[ОК] [${this.sliderId}] Успішно підключено події. Кількість знайдених прев'ю: ${this.thumbnails.length}`);
   }
 
-  
+  /* Фонове завантаження великих зображень у кеш браузера для плавності переходів*/
+  preloadImages() {
+    this.thumbnails.forEach(thumb => {
+      const url = thumb.getAttribute('data-large');
+      if (url && !url.includes('youtube.com') && !url.includes('youtu.be') && !url.includes('embed')) {
+        const img = new Image();
+        img.src = url;
+      }
+    });
+  }
 
   /**
    * Головний метод оновлення контенту у великому вікні плеєра.
