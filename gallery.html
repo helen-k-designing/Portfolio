@@ -11,6 +11,8 @@
     <link rel="icon" type="image/png" sizes="16×16" href="./favicon-16×16.png">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/form-exit.css">
+    <link rel="stylesheet" href="./css/form-reg.css">
 </head>
 <body>
   
@@ -23,13 +25,14 @@
         <li class="nav-item"><a href="gallery.html">Gallery</a></li>
     </ul>
     
-    <!-- Блок авторизації (буде автоматично притиснутий праворуч) -->
+    <!-- Блок авторизації -->
     <ul class="nav-links nav-auth">
-        <li class="nav-item"><a href="form-exit.html">Sign In</a></li>
-        <!-- Кнопку реєстрації можна стилізувати як акцентну кнопку-посилання -->
-        <li class="nav-item"><a href="form-reg.html" class="nav-btn-reg">Registration</a></li>
+        <!-- ТЕПЕР ВЕДУТЬ НА ЯКОРІ НА ТІЙ ЖЕ СТОРІНЦІ -->
+        <li class="nav-item"><a href="#open-login">Sign In</a></li>
+        <li class="nav-item"><a href="#open-register-modal" class="nav-btn-reg">Registration</a></li>
     </ul>
-    </nav>
+</nav>
+
 
     <header class="header">
         <img src="./Image/logo.png" alt="Logo" class="header-logo">
@@ -223,6 +226,179 @@
     </footer>
     <!-- footer кінець -->
     
-    
+       <!-- ==========================================================================
+     МОДАЛЬНЕ ВІКНО 1: ВХІД (SIGN IN) - ПОВНИЙ КОД З УСІМА ПОЛЯМИ ТА СОЦМЕРЕЖАМИ
+     ========================================================================== -->
+<div id="loginModalOverlay" class="modal-overlay">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your email and password to log in.</p>
+            </div>
+            
+            <form id="loginForm" class="login-form" autocomplete="off" novalidate>
+                <!-- Поле Email -->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <div class="input-wrapper">
+                        <input name="email" id="email" type="email" autocomplete="off" required />
+                    </div>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <!-- Поле Пароля -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="input-wrapper password-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="toggle-password" data-target="password" aria-label="Show password" tabindex="-1">
+                            <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                
+                <!-- Чекбокс Remember Me -->
+                <div class="form-options remember-me">
+                    <div class="remember-wrapper">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <label for="rememberMe">Remember Me</label>
+                    </div>
+                </div>
+                
+                <!-- Головні кнопки дії -->
+                <div class="form-actions-group">
+                    <button type="submit" class="login-btn">Увійти</button>
+                    <button type="button" id="cancelLoginBtn" class="cancel-btn">Відмінити</button>
+                </div>
+            </form>
+
+            <!-- Горизонтальний роздільник -->
+            <div class="divider-container">
+                <div class="divider-line"></div>
+                <span class="login-with">Or login with</span>
+            </div>
+            
+            <!-- Допоміжні кнопки авторизації -->
+            <div class="soc-options">
+                <button type="button" class="google-login">Google</button>
+                <button type="button" class="github-login">GitHub</button>
+            </div>
+            
+            <!-- Нижні навігаційні посилання сторінки -->
+            <div class="footer-links">
+                <a href="/forgot-password">Forgot Password?</a>
+                <a href="#open-register-modal">Don't have an account? Register</a>
+            </div>
+        </div>
+        <button type="button" id="closeLoginBtn" class="close-modal-btn" aria-label="Close login form">&times;</button>
+    </div>
+</div>
+
+
+
+  <!-- ==========================================================================
+     МОДАЛЬНЕ ВІКНО 2: РЕЄСТРАЦІЯ (REGISTRATION) - ПОВНІСТЮ ВИПРАВЛЕНИЙ HTML
+     ========================================================================== -->
+<div id="registerModalOverlay" class="modal-overlay">
+    <div class="login-container">
+        <header class="login-header">
+            <h2>Registration</h2>
+            <p class="login-subheading">Fill in your profile details</p>
+        </header>
+
+        <form id="registrationForm" autocomplete="off" novalidate>
+            
+            <!-- РЯДОК 1: Прізвище та Ім'я -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <div class="input-wrapper">
+                        <input name="lastName" id="lastName" type="text" autocomplete="family-name" required />
+                    </div>
+                    <span class="error-message" id="lastNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <div class="input-wrapper">
+                        <input name="firstName" id="firstName" type="text" autocomplete="given-name" required />
+                    </div>
+                    <span class="error-message" id="firstNameError"></span>
+                </div>
+            </div>
+
+            <!-- РЯДОК 2: Електронна адреса та Телефон -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email-reg">Email:</label>
+                    <div class="input-wrapper">
+                        <input name="email" id="email-reg" type="email" autocomplete="off" required />
+                    </div>
+                    <span class="error-message" id="emailRegError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="phone" name="phone" placeholder="+380..." required autocomplete="off">
+                    </div>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+            </div>
+
+            <!-- РЯДОК 3: Пароль та Підтвердження пароля (ТЕПЕР ОБИДВА МАЮТЬ СВОЇ ОБГОРТКИ FORM-GROUP) -->
+            <div class="form-row">
+                <!-- Ліва колонка -->
+                <div class="form-group">
+                    <label for="password-reg">Password</label>
+                    <div class="input-wrapper password-wrapper">
+                        <input type="password" id="password-reg" name="password" placeholder="Minimum 8 characters" required>
+                        <button type="button" class="toggle-password" data-target="password-reg" aria-label="Show password" tabindex="-1">
+                            <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordRegError"></span>
+                </div>
+                
+                <!-- Права колонка -->
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="input-wrapper password-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your password" required>
+                        <button type="button" class="toggle-password" data-target="confirm-password" aria-label="Show confirm password" tabindex="-1">
+                            <svg class="eye-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                            <svg class="eye-open hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+            </div>
+
+            <!-- Блок вибору Статі -->
+            <div class="form-group">
+                <p class="gender-title">Gender</p>
+                <div class="gender-wrapper">
+                    <label class="gender-option">
+                        <input type="radio" id="genderFemale" name="gender" value="female" required>
+                        <span>Female</span>
+                    </label>
+                    <label class="gender-option">
+                        <input type="radio" id="genderMale" name="gender" value="male" tabindex="0">
+                        <span>Male</span>
+                    </label>
+                </div>
+                <span class="error-message" id="genderError"></span>
+            </div>
+
+            <button type="submit" class="login-btn">Register</button>
+        </form>
+        <button type="button" id="closeRegisterBtn" class="close-modal-btn" aria-label="Close registration form">&times;</button>
+    </div>
+</div>
+
+    <!-- ТЕПЕР ПІДКЛЮЧАЄМО ОДИН ОБ'ЄДНАНИЙ ФАЙЛ СКРИПТУ ДЛЯ ГАЛЕРЕЇ -->
+    <script src="./js/gallery-modals.js" defer></script>
 </body>
 </html>

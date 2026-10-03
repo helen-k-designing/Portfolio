@@ -9,21 +9,6 @@
     padding: 0;             /* Видаляє внутрішні відступи */
 }
 
-/* Оформлення головного фону сторінки (тег body) */
-body {
-    font-family: 'Nunito-Bold', sans-serif; /* Сучасний закруглений шрифт для сайту */
-    background-color: #717171;         /* Матовий нейтральний сірий колір фону */
-    padding: 20px;                    /* Безпечні відступи від країв екрана дисплея */
-    line-height: 1.6;                 /* Комфортна відстань між рядками тексту */
-    
-    /* Центрування головної кнопки на екрані за допомогою Flexbox */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;                /* Розтягує сторінку на всю висоту вікна браузера */
-}
-
 /* Кнопка "Open Login" на головній сторінці */
 .action-btn {
     padding: 12px 24px;
