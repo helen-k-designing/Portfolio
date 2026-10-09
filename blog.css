@@ -1,0 +1,85 @@
+/* Скидання базових відступів */
+* {
+    margin:
+        0;
+    padding:
+        0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    /* Перетворюємо body на Grid-контейнер */
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    /* Основний контент ширший, сайдбар вужчий */
+    grid-template-rows: auto 1fr auto;
+    /* Шапка і підвал по контенту, середина займає все місце */
+    /* Описуємо карту макета */
+    grid-template-areas:
+        "h h"  /* Шапка на всю ширину (2 колонки) */
+        "m s"  /* Основна частина та сайдбар поруч */
+        "f f"; /* Підвал на всю ширину (2 колонки) */
+    gap: 15px;
+    /* Відступи між блоками */
+}
+
+.site-header {
+    grid-area: h;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.site-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content {
+    grid-area: m;
+    background-color: #ecf0f1;
+    padding: 20px;
+}
+
+.sidebar {
+    grid-area: s;
+    background-color: #e0e0e0;
+    padding: 20px;
+}
+
+.site-footer {
+    grid-area: f;
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Адаптивність (Мобільна версія) */
+@media (max-width: 768px) {
+    body {
+        /* На смартфонах перебудовуємо все в одну колонку */
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "h"
+            "m"
+            "s"
+            "f";
+    }
+
+    .site-header {
+        flex-direction: column;
+        gap: 10px;
+    }
